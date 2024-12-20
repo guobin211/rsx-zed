@@ -1,15 +1,40 @@
-(attribute) @property
-(directive_attribute) @property
-(quoted_attribute_value) @string
-(interpolation) @punctuation.special
-(raw_text) @embedded
+; 文件: queries/highlights.scm
 
-((tag_name) @type
- (#match? @type "^[A-Z]"))
+; Rust 块
+(rust_block
+  "---" @punctuation.delimiter)
 
-(directive_name) @keyword
-(directive_argument) @constant
+(rust_content) @rust
 
-(start_tag) @tag
-(end_tag) @tag
-(self_closing_tag) @tag
+; HTML 模板块
+(template_block
+  "<template>" @tag
+  "</template>" @tag)
+
+(html_content) @html
+
+; CSS 样式块
+(style_block
+  "<style>" @tag
+  "</style>" @tag)
+
+(css_content) @css
+
+; JavaScript 脚本块
+(script_block
+  "<script>" @tag
+  "</script>" @tag)
+
+(js_content) @javascript
+
+; 注释
+(comment) @comment
+
+; 块分隔符
+"---" @punctuation.delimiter
+"<template>" @tag.delimiter
+"</template>" @tag.delimiter
+"<style>" @tag.delimiter
+"</style>" @tag.delimiter
+"<script>" @tag.delimiter
+"</script>" @tag.delimiter
