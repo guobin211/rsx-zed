@@ -1,17 +1,19 @@
-; 文件: queries/indents.scm
+; Indentation rules for RSX
 
-; 块级缩进
-[
-  (rust_block)
-  (template_block)
-  (style_block)
-  (script_block)
-] @indent
+; Section blocks indent their contents
+(rust_section) @indent
+(script_section) @indent
+(style_section) @indent
+(template_section) @indent
 
-; 结束标记减少缩进
-[
-  "---"
-  "</template>"
-  "</style>"
-  "</script>"
-] @outdent
+; HTML elements indent their contents
+(html_element) @indent
+
+; Control flow directives indent their contents
+(if_directive) @indent
+(each_directive) @indent
+(each_directive_alt) @indent
+
+; Else clauses create dedent then indent
+(else_clause) @indent.dedent
+(else_if_clause) @indent.dedent

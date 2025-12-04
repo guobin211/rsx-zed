@@ -1,11 +1,11 @@
 id = "rsx"
 name = "Rsx"
-description = "Rsx support."
-version = "0.1.0"
+description = "RSX language support for Zed - A full-stack web framework combining Rust, TypeScript, Handlebars templates, and SCSS"
+version = "0.1.2"
 schema_version = 1
-authors = ["guobin211"]
-repository = "https://github.com/guobin211/rsx-zed"
+authors = ["michael <michaelbguo@tencent.com>"]
+repository = "https://github.com/guobin211/tree-sitter-rsx"
 
 [grammars.rsx]
 repository = "https://github.com/guobin211/tree-sitter-rsx"
-commit="d1436a2dd7f70404c2f791437e1ed23b1809a975"
+commit = "main"

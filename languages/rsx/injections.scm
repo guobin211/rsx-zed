@@ -1,17 +1,16 @@
-; 文件: queries/injections.scm
+; Language injections for RSX
 
-; Rust 代码注入
-((rust_block) @injection.content
-  (#set! injection.language "rust"))
+; Rust code in frontmatter section
+((rust_section
+  (rust_content) @content)
+  (#set! language "rust"))
 
-; HTML 代码注入
-((template_block) @injection.content
-  (#set! injection.language "html"))
+; TypeScript in script section
+((script_section
+  (script_content) @content)
+  (#set! language "typescript"))
 
-; CSS 代码注入
-((style_block) @injection.content
-  (#set! injection.language "css"))
-
-; JavaScript 代码注入
-((script_block) @injection.content
-  (#set! injection.language "javascript"))
+; SCSS/CSS in style section
+((style_section
+  (style_content) @content)
+  (#set! language "scss"))
