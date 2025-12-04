@@ -1,13 +1,7 @@
 ; Indentation rules for RSX in Zed
-; Reference: https://zed.dev/docs/extensions/languages
 
-; HTML elements - indent after opening tag
-(html_element
-  tag_name: (tag_name)) @indent
-
-; Closing tags end indent
-(html_element
-  "</") @end
+; HTML elements - indent children
+(html_element) @indent
 
 ; Control flow directives
 (if_directive) @indent
@@ -20,10 +14,13 @@
 (script_section) @indent
 (style_section) @indent
 
-; Brackets
-("{" @indent)
-("}" @end)
-("[" @indent)
-("]" @end)
-("(" @indent)
-(")" @end)
+; Dedent on closing tags
+">" @end
+"/>" @end
+"{{/if}}" @end
+"{{/each}}" @end
+"{{:else}}" @end
+"---" @end
+"</script>" @end
+"</style>" @end
+"</template>" @end

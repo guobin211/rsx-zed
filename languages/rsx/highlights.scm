@@ -1,57 +1,87 @@
 ; RSX Syntax Highlighting for Zed
+; Based on tree-sitter-rsx grammar
 
-; Comments
+; ============================================
+; Comments (highest priority)
+; ============================================
 (comment) @comment
 (template_comment) @comment
 
-; Section delimiters
-(rust_section "---" @punctuation.special)
-(script_section "<script>" @tag)
-(script_section "</script>" @tag)
-(style_section "<style>" @tag)
-(style_section "</style>" @tag)
-(template_section "<template>" @tag)
-(template_section "</template>" @tag)
-
-; HTML Elements
-(html_element
-  tag_name: (tag_name) @tag)
-
-(html_element "<" @tag.delimiter)
-(html_element ">" @tag.delimiter)
-(html_element "/>" @tag.delimiter)
-(html_element "</" @tag.delimiter)
-
-; HTML attributes
-(html_attribute
-  name: (attribute_name) @attribute)
-
-"=" @operator
-
-; Template interpolation
-"{{" @punctuation.bracket
-"}}" @punctuation.bracket
-
-(template_interpolation
-  expression: (identifier) @variable)
-
-(template_interpolation
-  expression: (property_access))
-
-; Control flow directives
-"{{#if" @keyword.control
-"{{:else" @keyword.control
-"{{:else}}" @keyword.control
-"{{/if}}" @keyword.control
-"{{#each" @keyword.control
-"{{@each" @keyword.control
-"{{/each}}" @keyword.control
-"{{@html" @keyword.directive
-
+; ============================================
+; Keywords - Control flow directives
+; ============================================
+"{{#if" @keyword
+"{{:else" @keyword
+"{{:else}}" @keyword
+"{{/if}}" @keyword
+"{{#each" @keyword
+"{{@each" @keyword
+"{{/each}}" @keyword
+"{{@html" @keyword
 "as" @keyword
-"if" @keyword.control
+"if" @keyword
 
-; Expressions
+; ============================================
+; Section delimiters & Tags
+; ============================================
+"---" @punctuation.special
+
+"<script>" @tag
+"</script>" @tag
+"<style>" @tag
+"</style>" @tag
+"<template>" @tag
+"</template>" @tag
+
+(tag_name) @tag
+
+; ============================================
+; HTML Attributes
+; ============================================
+(attribute_name) @attribute
+
+; ============================================
+; Literals (before expressions)
+; ============================================
+(number_literal) @number
+(string_literal) @string
+(quoted_attribute_value) @string
+(boolean_literal) @boolean
+
+; ============================================
+; Function calls
+; ============================================
+(function_call
+  function: (identifier) @function.call)
+
+(function_call
+  function: (property_access
+    property: (identifier) @function.method))
+
+; ============================================
+; Property access
+; ============================================
+(property_access
+  property: (identifier) @property)
+
+; ============================================
+; Function parameters
+; ============================================
+(each_directive
+  item: (identifier) @variable.parameter)
+
+(each_directive
+  index: (identifier) @variable.parameter)
+
+(each_directive_alt
+  item: (identifier) @variable.parameter)
+
+(each_directive_alt
+  index: (identifier) @variable.parameter)
+
+; ============================================
+; Operators
+; ============================================
 (binary_expression
   operator: _ @operator)
 
@@ -61,52 +91,23 @@
 (conditional_expression "?" @operator)
 (conditional_expression ":" @operator)
 
-; Property access
-(property_access
-  property: (identifier) @property)
+"=" @operator
 
-(property_access
-  object: (identifier) @variable)
-
+; ============================================
+; Punctuation
+; ============================================
+"{{" @punctuation.special
+"}}" @punctuation.special
 "." @punctuation.delimiter
-
-; Function calls
-(function_call
-  function: (identifier) @function)
-
+"," @punctuation.delimiter
 "(" @punctuation.bracket
 ")" @punctuation.bracket
+"<" @punctuation.bracket
+">" @punctuation.bracket
+"/>" @punctuation.bracket
+"</" @punctuation.bracket
 
-; Each directive variables
-(each_directive
-  iterable: (identifier) @variable)
-
-(each_directive
-  item: (identifier) @variable.parameter)
-
-(each_directive
-  index: (identifier) @variable.parameter)
-
-(each_directive_alt
-  iterable: (identifier) @variable)
-
-(each_directive_alt
-  item: (identifier) @variable.parameter)
-
-(each_directive_alt
-  index: (identifier) @variable.parameter)
-
-; Raw HTML content
-(raw_html_directive
-  content: (identifier) @variable)
-
-; Literals
-(number_literal) @number
-(string_literal) @string
-(boolean_literal) @constant.builtin
-
-; Punctuation
-"," @punctuation.delimiter
-
-; Identifiers (fallback)
+; ============================================
+; Identifiers (fallback - lowest priority)
+; ============================================
 (identifier) @variable

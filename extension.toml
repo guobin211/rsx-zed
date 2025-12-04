@@ -4,8 +4,8 @@ description = "RSX language support for Zed - A full-stack web framework combini
 version = "0.2.0"
 schema_version = 1
 authors = ["michael <michaelbguo@tencent.com>"]
-repository = "https://github.com/guobin211/tree-sitter-rsx"
+repository = "https://github.com/guobin211/rsx-zed"
 
 [grammars.rsx]
 repository = "https://github.com/guobin211/tree-sitter-rsx"
-rev = "7f90e44c8566a5242e659a1cd186e5a2825645fe"
+commit = "f100e5eab7836bd26fd1e11da288ff2181de327d"

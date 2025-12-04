@@ -5,6 +5,8 @@ path_suffixes = ["rsx"]
 line_comments = ["// "]
 block_comment = ["/*", "*/"]
 autoclose_before = ";:.,=}])>"
+word_characters = ["-"]
+
 brackets = [
     { start = "{", end = "}", close = true, newline = true },
     { start = "[", end = "]", close = true, newline = true },
@@ -14,4 +16,3 @@ brackets = [
     { start = "'", end = "'", close = true, newline = false, not_in = ["string", "comment"] },
     { start = "{{", end = "}}", close = true, newline = false },
 ]
-word_characters = ["-"]
