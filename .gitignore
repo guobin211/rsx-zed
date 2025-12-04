@@ -123,4 +123,4 @@ apps/devx-web/public/preload/services.js
 **/**/**/protos/**/*.ts
 
 apps/tree-sitter-rsx
-extension.wasm
+grammars/rsx
