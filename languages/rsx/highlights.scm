@@ -4,55 +4,79 @@
 ; ============================================
 ; Comments (highest priority)
 ; ============================================
-(comment) @comment
 (template_comment) @comment
 
 ; ============================================
 ; Keywords - Control flow directives
 ; ============================================
-"{{#if" @keyword
-"{{:else" @keyword
-"{{:else}}" @keyword
-"{{/if}}" @keyword
-"{{#each" @keyword
-"{{@each" @keyword
-"{{/each}}" @keyword
-"{{@html" @keyword
+; If directive keywords
+"{{@if" @keyword.control.conditional
+"{{:else if" @keyword.control.conditional
+"{{:elseif" @keyword.control.conditional
+"{{:else}}" @keyword.control.conditional
+"{{/if}}" @keyword.control.conditional
+
+; Each directive keywords
+"{{@each" @keyword.control.repeat
+"{{/each}}" @keyword.control.repeat
+
+; Raw HTML directive
+"{{@html" @keyword.directive
+
+; Other keywords
 "as" @keyword
-"if" @keyword
 
 ; ============================================
-; Section delimiters & Tags
+; Section delimiters
 ; ============================================
 "---" @punctuation.special
 
-"<script>" @tag
-"</script>" @tag
-"<style>" @tag
-"</style>" @tag
-"<template>" @tag
-"</template>" @tag
+; ============================================
+; Section tags
+; ============================================
+"<script>" @tag.delimiter
+"</script>" @tag.delimiter
+"<style>" @tag.delimiter
+"</style>" @tag.delimiter
+"<template>" @tag.delimiter
+"</template>" @tag.delimiter
 
-(tag_name) @tag
+; ============================================
+; HTML Elements
+; ============================================
+(html_element
+  tag_name: (tag_name) @tag)
+
+; ============================================
+; Client Components (PascalCase)
+; ============================================
+(client_component
+  component_name: (component_name) @type)
 
 ; ============================================
 ; HTML Attributes
 ; ============================================
-(attribute_name) @attribute
+(html_attribute
+  name: (attribute_name) @attribute)
+
+; Special client attribute
+(html_attribute
+  name: (attribute_name) @attribute.special
+  (#eq? @attribute.special "client"))
 
 ; ============================================
-; Literals (before expressions)
+; Literals
 ; ============================================
 (number_literal) @number
 (string_literal) @string
 (quoted_attribute_value) @string
-(boolean_literal) @boolean
+(boolean_literal) @constant.builtin
 
 ; ============================================
 ; Function calls
 ; ============================================
 (function_call
-  function: (identifier) @function.call)
+  function: (identifier) @function)
 
 (function_call
   function: (property_access
@@ -64,20 +88,32 @@
 (property_access
   property: (identifier) @property)
 
+(property_access
+  object: (identifier) @variable)
+
 ; ============================================
-; Function parameters
+; Directive variables
 ; ============================================
+; If directive condition
+(if_directive
+  condition: (identifier) @variable)
+
+(else_if_clause
+  condition: (identifier) @variable)
+
+; Each directive variables
+(each_directive
+  iterable: (identifier) @variable)
+
 (each_directive
   item: (identifier) @variable.parameter)
 
 (each_directive
   index: (identifier) @variable.parameter)
 
-(each_directive_alt
-  item: (identifier) @variable.parameter)
-
-(each_directive_alt
-  index: (identifier) @variable.parameter)
+; Raw HTML content
+(raw_html_directive
+  content: (identifier) @variable)
 
 ; ============================================
 ; Operators
@@ -96,16 +132,28 @@
 ; ============================================
 ; Punctuation
 ; ============================================
+; Template interpolation
 "{{" @punctuation.special
 "}}" @punctuation.special
+
+; Delimiters
 "." @punctuation.delimiter
 "," @punctuation.delimiter
+
+; Brackets
 "(" @punctuation.bracket
 ")" @punctuation.bracket
-"<" @punctuation.bracket
-">" @punctuation.bracket
-"/>" @punctuation.bracket
-"</" @punctuation.bracket
+
+; HTML tag delimiters
+"<" @tag.delimiter
+">" @tag.delimiter
+"/>" @tag.delimiter
+"</" @tag.delimiter
+
+; ============================================
+; Template text
+; ============================================
+(template_text) @text
 
 ; ============================================
 ; Identifiers (fallback - lowest priority)

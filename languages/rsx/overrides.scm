@@ -4,7 +4,6 @@
 (string_literal) @string
 
 ; Comment scopes
-(comment) @comment
 (template_comment) @comment
 
 ; Content sections for language injection
@@ -14,3 +13,6 @@
 
 ; Quoted attribute values
 (quoted_attribute_value) @string
+
+; Template text
+(template_text) @text

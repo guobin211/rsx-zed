@@ -5,7 +5,7 @@ path_suffixes = ["rsx"]
 line_comments = ["// "]
 block_comment = ["/*", "*/"]
 autoclose_before = ";:.,=}])>"
-word_characters = ["-"]
+word_characters = ["-", "_"]
 
 brackets = [
     { start = "{", end = "}", close = true, newline = true },
@@ -15,4 +15,9 @@ brackets = [
     { start = "\"", end = "\"", close = true, newline = false, not_in = ["string", "comment"] },
     { start = "'", end = "'", close = true, newline = false, not_in = ["string", "comment"] },
     { start = "{{", end = "}}", close = true, newline = false },
+    { start = "<!--", end = "-->", close = true, newline = false },
 ]
+
+# Scope injections for embedded languages
+[scope_opt_in_language_servers]
+rsx-language-server = true
