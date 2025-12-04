@@ -1,19 +1,29 @@
-; Indentation rules for RSX
+; Indentation rules for RSX in Zed
+; Reference: https://zed.dev/docs/extensions/languages
 
-; Section blocks indent their contents
-(rust_section) @indent
-(script_section) @indent
-(style_section) @indent
-(template_section) @indent
+; HTML elements - indent after opening tag
+(html_element
+  tag_name: (tag_name)) @indent
 
-; HTML elements indent their contents
-(html_element) @indent
+; Closing tags end indent
+(html_element
+  "</") @end
 
-; Control flow directives indent their contents
+; Control flow directives
 (if_directive) @indent
 (each_directive) @indent
 (each_directive_alt) @indent
 
-; Else clauses create dedent then indent
-(else_clause) @indent.dedent
-(else_if_clause) @indent.dedent
+; Section blocks
+(rust_section) @indent
+(template_section) @indent
+(script_section) @indent
+(style_section) @indent
+
+; Brackets
+("{" @indent)
+("}" @end)
+("[" @indent)
+("]" @end)
+("(" @indent)
+(")" @end)

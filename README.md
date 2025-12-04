@@ -1,50 +1,78 @@
-# Zed RSX Extension
+# RSX Language Support for Zed
 
-A RSX language extension for [Zed](https://zed.dev).
+RSX 语言的 Zed 编辑器扩展，提供语法高亮支持。
 
-## Features
+## 功能
 
-- **Syntax Highlighting** - Full syntax highlighting for RSX files
-- **Language Injection** - Embedded Rust, TypeScript, and SCSS highlighting
-- **Code Folding** - Fold sections, directives, and comments
-- **Bracket Matching** - Auto-close brackets and template delimiters
-- **Outline View** - Navigate through sections and directives
-- **Text Objects** - Vim-style text objects for sections and blocks
+- **语法高亮** - 完整的 RSX 文件语法高亮
+- **语言注入** - 嵌入式 Rust、TypeScript、SCSS 高亮
+- **代码折叠** - 折叠 sections、HTML 元素、控制流块
+- **括号匹配** - 自动闭合括号和模板分隔符
+- **大纲视图** - 导航 sections 和指令
+- **文本对象** - Vim 风格的文本对象
 
-## RSX Language
+## RSX 语言
 
-RSX is a full-stack web framework combining:
+RSX 是一个全栈 Web 框架，结合了：
 
-- **Rust** (`---` section) - Server-side logic
-- **TypeScript** (`<script>` section) - Client-side logic
-- **Handlebars** (`<template>` section) - Template rendering
-- **SCSS** (`<style>` section) - Styling
+- **Rust** (`---` section) - 服务端逻辑
+- **TypeScript** (`<script>` section) - 客户端逻辑
+- **Handlebars** (`<template>` section) - 模板渲染
+- **SCSS** (`<style>` section) - 样式
 
-## Installation
+## 安装
 
-### From Zed Extensions
+### 开发模式安装（推荐）
 
-1. Open Zed
-2. Go to `Extensions` panel
-3. Search for "rsx"
-4. Click Install
+1. 打开 Zed 编辑器
+2. 打开命令面板 (`Cmd+Shift+P`)
+3. 输入 `zed: install dev extension`
+4. 选择 `rsx-zed` 目录
 
-### Manual Installation
+### 从 Zed 扩展商店安装
+
+1. 打开 Zed
+2. 进入 `Extensions` 面板 (`Cmd+Shift+X`)
+3. 搜索 "RSX"
+4. 点击 Install
+
+## 开发
 
 ```bash
-cd apps/rsx-zed
-cargo build --release
+# 编译扩展
+cd extensions/rsx-zed
+cargo build --release --target wasm32-wasip1
+
+# 复制 wasm 文件
+cp target/wasm32-wasip1/release/rsx_zed.wasm extension.wasm
 ```
 
-## Language Server
+## 目录结构
 
-This extension integrates with `rsx-language-server` for:
+```
+rsx-zed/
+├── extension.toml          # 扩展配置
+├── extension.wasm          # 编译后的 WASM
+├── Cargo.toml              # Rust 配置
+├── src/lib.rs              # 扩展入口
+├── grammars/
+│   └── rsx.wasm            # Tree-sitter grammar
+└── languages/rsx/
+    ├── config.toml         # 语言配置
+    ├── highlights.scm      # 语法高亮
+    ├── injections.scm      # 语言注入
+    ├── brackets.scm        # 括号匹配
+    ├── folds.scm           # 代码折叠
+    ├── indents.scm         # 自动缩进
+    ├── outline.scm         # 大纲导航
+    ├── overrides.scm       # 作用域覆盖
+    └── textobjects.scm     # 文本对象
+```
 
-- Auto-completion
-- Diagnostics
-- Hover information
-- Go to definition
+## Grammar
 
-## Grammar Reference
+使用 [tree-sitter-rsx](https://github.com/guobin211/tree-sitter-rsx) 进行语法解析。
 
-[tree-sitter-rsx](https://github.com/guobin211/tree-sitter-rsx)
+## License
+
+MIT

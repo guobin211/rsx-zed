@@ -1,26 +1,22 @@
-; Bracket pairs for RSX
+; Bracket matching for RSX in Zed
+; Reference: https://zed.dev/docs/extensions/languages
 
-; Section tags
-("<script>" @open "</script>" @close)
-("<style>" @open "</style>" @close)
-("<template>" @open "</template>" @close)
-
-; Rust section delimiters
-("---" @open "---" @close)
-
-; Template interpolation
-("{{" @open "}}" @close)
-
-; HTML tag delimiters
-("<" @open ">" @close)
-("</" @open ">" @close)
+; HTML element brackets
+(html_element "<" @open ">" @close)
+(html_element "</" @open ">" @close)
 
 ; Self-closing tag
-("<" @open "/>" @close)
+(html_element "<" @open "/>" @close)
 
-; Parentheses
+; Template interpolation brackets
+("{{" @open "}}" @close)
+
+; Standard brackets
+("{" @open "}" @close)
+("[" @open "]" @close)
 ("(" @open ")" @close)
 
-; String quotes
-("'" @open "'" @close)
-("\"" @open "\"" @close)
+; Section tags
+("<template>" @open "</template>" @close)
+("<script>" @open "</script>" @close)
+("<style>" @open "</style>" @close)

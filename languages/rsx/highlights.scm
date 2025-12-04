@@ -1,14 +1,10 @@
 ; RSX Syntax Highlighting for Zed
 
-; ============================================
 ; Comments
-; ============================================
 (comment) @comment
 (template_comment) @comment
 
-; ============================================
 ; Section delimiters
-; ============================================
 (rust_section "---" @punctuation.special)
 (script_section "<script>" @tag)
 (script_section "</script>" @tag)
@@ -17,31 +13,22 @@
 (template_section "<template>" @tag)
 (template_section "</template>" @tag)
 
-; ============================================
 ; HTML Elements
-; ============================================
-; Tag names - lowercase for HTML tags
 (html_element
   tag_name: (tag_name) @tag)
 
-; Tag delimiters
 (html_element "<" @tag.delimiter)
 (html_element ">" @tag.delimiter)
 (html_element "/>" @tag.delimiter)
 (html_element "</" @tag.delimiter)
 
-; ============================================
-; HTML Attributes
-; ============================================
+; HTML attributes
 (html_attribute
   name: (attribute_name) @attribute)
 
-; Quoted attribute values
-(quoted_attribute_value) @string
+"=" @operator
 
-; ============================================
-; Template Interpolation
-; ============================================
+; Template interpolation
 "{{" @punctuation.bracket
 "}}" @punctuation.bracket
 
@@ -49,13 +36,9 @@
   expression: (identifier) @variable)
 
 (template_interpolation
-  expression: (property_access
-    object: (identifier) @variable
-    property: (identifier) @property))
+  expression: (property_access))
 
-; ============================================
-; Control Flow Directives
-; ============================================
+; Control flow directives
 "{{#if" @keyword.control
 "{{:else" @keyword.control
 "{{:else}}" @keyword.control
@@ -68,13 +51,7 @@
 "as" @keyword
 "if" @keyword.control
 
-; ============================================
-; Operators
-; ============================================
-"=" @operator
-"." @punctuation.delimiter
-"," @punctuation.delimiter
-
+; Expressions
 (binary_expression
   operator: _ @operator)
 
@@ -84,31 +61,23 @@
 (conditional_expression "?" @operator)
 (conditional_expression ":" @operator)
 
-; ============================================
-; Property Access
-; ============================================
-(property_access
-  object: (identifier) @variable)
-
+; Property access
 (property_access
   property: (identifier) @property)
 
-; ============================================
-; Function Calls
-; ============================================
+(property_access
+  object: (identifier) @variable)
+
+"." @punctuation.delimiter
+
+; Function calls
 (function_call
   function: (identifier) @function)
-
-(function_call
-  function: (property_access
-    property: (identifier) @function.method))
 
 "(" @punctuation.bracket
 ")" @punctuation.bracket
 
-; ============================================
-; Each Directive Variables
-; ============================================
+; Each directive variables
 (each_directive
   iterable: (identifier) @variable)
 
@@ -127,33 +96,17 @@
 (each_directive_alt
   index: (identifier) @variable.parameter)
 
-; ============================================
-; If Directive Conditions
-; ============================================
-(if_directive
-  condition: (identifier) @variable)
-
-(if_directive
-  condition: (property_access
-    object: (identifier) @variable))
-
-(else_if_clause
-  condition: (identifier) @variable)
-
-; ============================================
-; Raw HTML Directive
-; ============================================
+; Raw HTML content
 (raw_html_directive
   content: (identifier) @variable)
 
-; ============================================
 ; Literals
-; ============================================
 (number_literal) @number
 (string_literal) @string
 (boolean_literal) @constant.builtin
 
-; ============================================
-; Fallback - Identifiers
-; ============================================
+; Punctuation
+"," @punctuation.delimiter
+
+; Identifiers (fallback)
 (identifier) @variable

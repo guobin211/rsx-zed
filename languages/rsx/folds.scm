@@ -1,19 +1,19 @@
-; Folding rules for RSX
+; Code folding rules for RSX in Zed
 
-; Section blocks can be folded
-(rust_section) @fold
-(script_section) @fold
-(style_section) @fold
-(template_section) @fold
-
-; HTML elements can be folded
+; Fold HTML elements with children
 (html_element) @fold
 
-; Control flow blocks can be folded
+; Fold sections
+(rust_section) @fold
+(template_section) @fold
+(script_section) @fold
+(style_section) @fold
+
+; Fold control flow blocks
 (if_directive) @fold
 (each_directive) @fold
 (each_directive_alt) @fold
 
-; Comments can be folded
+; Fold comments
 (comment) @fold
 (template_comment) @fold
