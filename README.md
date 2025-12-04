@@ -14,6 +14,7 @@ A RSX language extension for [Zed](https://zed.dev).
 ## RSX Language
 
 RSX is a full-stack web framework combining:
+
 - **Rust** (`---` section) - Server-side logic
 - **TypeScript** (`<script>` section) - Client-side logic
 - **Handlebars** (`<template>` section) - Template rendering
@@ -22,12 +23,14 @@ RSX is a full-stack web framework combining:
 ## Installation
 
 ### From Zed Extensions
+
 1. Open Zed
 2. Go to `Extensions` panel
 3. Search for "rsx"
 4. Click Install
 
 ### Manual Installation
+
 ```bash
 cd apps/rsx-zed
 cargo build --release
@@ -36,6 +39,7 @@ cargo build --release
 ## Language Server
 
 This extension integrates with `rsx-language-server` for:
+
 - Auto-completion
 - Diagnostics
 - Hover information
