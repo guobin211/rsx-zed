@@ -6,10 +6,10 @@ RSX 语言的 Zed 编辑器扩展，提供语法高亮、括号匹配、缩进�
 
 - ✅ **语法高亮**: 完整的 RSX 语法高亮支持
 - ✅ **语言注入**:
-  - Rust 代码 (`---` 区块)
-  - TypeScript (`<script>` 区块)
-  - HTML (`<template>` 区块)
-  - SCSS (`<style>` 区块)
+    - Rust 代码 (`---` 区块)
+    - TypeScript (`<script>` 区块)
+    - HTML (`<template>` 区块)
+    - SCSS (`<style>` 区块)
 - ✅ **括号匹配**: 支持 `{{}}`, `{}`, `[]`, `()`, `<>` 等
 - ✅ **自动缩进**: 智能缩进支持
 - ✅ **代码折叠**: 支持区域折叠
@@ -27,7 +27,7 @@ RSX 语言的 Zed 编辑器扩展，提供语法高亮、括号匹配、缩进�
 
 ### 从 Zed 扩展市场安装
 
-*即将推出*
+_即将推出_
 
 ## RSX 语法示例
 
@@ -51,7 +51,7 @@ const { message } = defineProps<{ message: string }>();
         {{:else}}
             <p>No message</p>
         {{/if}}
-        
+
         {{@each items as item, index}}
             <span>{{ index }}: {{ item.name }}</span>
         {{/each}}
