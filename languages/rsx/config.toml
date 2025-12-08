@@ -17,7 +17,3 @@ brackets = [
     { start = "{{", end = "}}", close = true, newline = false },
     { start = "<!--", end = "-->", close = true, newline = false },
 ]
-
-# Scope injections for embedded languages
-[scope_opt_in_language_servers]
-rsx-language-server = true
