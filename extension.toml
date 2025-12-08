@@ -9,3 +9,7 @@ repository = "https://github.com/guobin211/rsx-zed"
 [grammars.rsx]
 repository = "https://github.com/guobin211/tree-sitter-rsx"
 commit = "941e90732b66d27b7423cb7e30f19d88789de886"
+
+[language_servers.rsx-language-server]
+name = "rsx-language-server"
+language_ids = ["RSX"]
